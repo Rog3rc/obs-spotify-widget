@@ -1,4 +1,4 @@
-import { CONFIG } from "./config";
+import { CONFIG } from "./config.js";
 
 const clientId = CONFIG.CLIENT_ID;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
