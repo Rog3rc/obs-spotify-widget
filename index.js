@@ -1,5 +1,6 @@
 const clientId = "0f6d3043ba1242ea96c1e8547827af7b";
-const redirectUri = "http://localhost:5500"; // Debe coincidir con el URI registrado en Spotify
+const redirectUri =
+  "http://localhost:5500" || "https://obs-try-widget.vercel.app"; // Debe coincidir con el URI registrado en Spotify
 const scopes = [
   "user-read-playback-state",
   "user-modify-playback-state",
