@@ -1,6 +1,6 @@
 import { CONFIG } from "./config.js";
 
-const clientId = CONFIG.CLIENT_ID;
+let clientId;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
 const scopes = [
   "user-read-playback-state",
@@ -9,9 +9,11 @@ const scopes = [
 ];
 
 document.getElementById("login").addEventListener("click", () => {
+  clientId = document.getElementById("textId").value;
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
     redirectUri
   )}&scope=${encodeURIComponent(scopes.join(" "))}`;
+  document.getElementById("textId").value = "";
   window.location.href = authUrl;
 });
 
@@ -30,6 +32,7 @@ window.onload = async () => {
   accessToken = getTokenFromUrl();
   if (accessToken) {
     document.getElementById("login").style.display = "none";
+    document.getElementById("textId").style.display = "none";
     document.getElementById("player").style.display = "block";
     await getCurrentTrack();
     startTimer();
