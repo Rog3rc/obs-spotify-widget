@@ -4,20 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/index.css" />
+    <title>Spowidget</title>
+    <link rel="shortcut icon" href="./img/logo.svg" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <input
       type="text"
       name="textId"
       id="textId"
-      placeholder="Pega tu Client_Id"
+      placeholder="Paste Client_Id"
     />
-    <button id="login">Conectar con Spotify</button>
+    <button id="login">Connect to Spotify</button>
+
+    <div class="file-input-container" id="file-input-container">
+      <label for="file-upload" class="custom-file-upload"> Select Image </label>
+      <input id="file-upload" type="file" accept=".jpg, .jpeg, .png, .gif" />
+      <span id="file-name" class="file-name">No file selected</span>
+    </div>
 
     <div id="player">
       <div id="track-info">
-        <h3 id="track-name">Nombre del track</h3>
-        <p id="artist-name">Artista</p>
+        <h3 id="track-name">Track Name</h3>
+        <p id="artist-name">Artist</p>
       </div>
       <div id="controls">
         <button id="prev">⏮</button>
@@ -43,5 +56,6 @@
     </div>
 
     <script src="./js/index.js" type="module"></script>
+    <script src="./js/setImages.js"></script>
   </body>
 </html>

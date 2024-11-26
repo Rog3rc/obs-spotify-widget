@@ -1,4 +1,5 @@
 import { CONFIG } from "./config.js";
+import { ifToast, Toast } from "./toasts.js";
 
 let clientId;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
@@ -9,7 +10,16 @@ const scopes = [
 ];
 
 document.getElementById("login").addEventListener("click", () => {
-  clientId = document.getElementById("textId").value;
+  if (document.getElementById("textId").value) {
+    clientId = document.getElementById("textId").value;
+  } else {
+    Toast.fire({
+      icon: "error",
+      title: "Please enter a client ID",
+    });
+    return;
+  }
+
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
     redirectUri
   )}&scope=${encodeURIComponent(scopes.join(" "))}`;
@@ -29,11 +39,21 @@ function getTokenFromUrl() {
 
 // Configurar token y mostrar reproductor
 window.onload = async () => {
+  document.getElementById("file-input-container").style.display = "none";
   accessToken = getTokenFromUrl();
   if (accessToken) {
     document.getElementById("login").style.display = "none";
     document.getElementById("textId").style.display = "none";
     document.getElementById("player").style.display = "block";
+    ifToast.fire({
+      html: `
+      <div>
+        <p>¿Deseas mostrar el elemento?</p>
+        <button id="yesButton" style="margin-right: 10px;">Sí</button>
+        <button id="noButton">No</button>
+      </div>
+    `,
+    });
     await getCurrentTrack();
     startTimer();
   } else {
