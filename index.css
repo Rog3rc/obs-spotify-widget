@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #121212;
+    color: white;
+  }
+  #login {
+    background: #1DB954;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  #player {
+    display: none;
+    text-align: center;
+  }
+  #track-info {
+    margin: 20px;
+  }
+  #controls button {
+    background: #1DB954;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  #progress-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  #progress-bar {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  #current-time {
+    font-size: 14px;
+  }
