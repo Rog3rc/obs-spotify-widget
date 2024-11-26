@@ -6,6 +6,13 @@ const scopes = [
   "user-read-currently-playing",
 ];
 
+document.getElementById("login").addEventListener("click", () => {
+  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
+    redirectUri
+  )}&scope=${encodeURIComponent(scopes.join(" "))}`;
+  window.location.href = authUrl;
+});
+
 let accessToken = "";
 
 // Obtener token de acceso desde la URL
