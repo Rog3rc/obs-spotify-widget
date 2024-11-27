@@ -10,7 +10,7 @@ export const Toast = Swal.mixin({
   },
 });
 
-export const ifToast = Swal.mixin({
+export const ShowToast = Swal.mixin({
   toast: true,
   position: "center",
   showConfirmButton: false,
@@ -29,3 +29,5 @@ export const ifToast = Swal.mixin({
     });
   },
 });
+
+export const ColorInput = Swal.mixin({});

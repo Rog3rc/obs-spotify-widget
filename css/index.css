@@ -116,3 +116,13 @@ body {
   text-align: center;
   padding: 10px 0;
 }
+
+#imgChange,
+#ctrls {
+  margin-top: 2vh;
+  color: white;
+  border: 5px solid #1db954;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #1db954;
+}

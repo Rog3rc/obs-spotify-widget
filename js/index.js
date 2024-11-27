@@ -1,5 +1,5 @@
 import { CONFIG } from "./modules/config.js";
-import { ifToast, Toast } from "./toasts.js";
+import { ShowToast, Toast } from "./toasts.js";
 
 let clientId;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
@@ -40,7 +40,7 @@ window.onload = async () => {
     document.getElementById("login").style.display = "none";
     document.getElementById("textId").style.display = "none";
     document.getElementById("player").style.display = "block";
-    ifToast.fire({
+    ShowToast.fire({
       html: `
       <div>
         <p>¿Deseas personalizar el fondo?</p>
