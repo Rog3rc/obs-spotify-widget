@@ -48,7 +48,7 @@ window.onload = async () => {
     ifToast.fire({
       html: `
       <div>
-        <p>¿Deseas mostrar el elemento?</p>
+        <p>¿Deseas personalizar el fondo?</p>
         <button id="yesButton" style="margin-right: 10px;">Sí</button>
         <button id="noButton">No</button>
       </div>
@@ -260,3 +260,7 @@ function startTimer() {
     await getCurrentTrack();
   }, 1000); // Actualiza cada segundo
 }
+
+document.getElementById(
+  "footer"
+).innerHTML = `Made by Rog3rc &#169; ${new Date().getFullYear()}`;
