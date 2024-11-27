@@ -39,11 +39,12 @@ body {
 #progress-container {
   display: flex;
   align-items: center;
+  margin-top: 9.4vh;
 }
 
 #progress-bar {
   flex-grow: 1;
-  margin-right: 10px;
+  margin-left: 5vw;
 }
 
 #current-time {
@@ -118,7 +119,9 @@ body {
 }
 
 #imgChange,
-#ctrls {
+#ctrls,
+#toCustom,
+#texts {
   margin-top: 2vh;
   color: white;
   border: 5px solid #1db954;

@@ -1,5 +1,5 @@
 import { CONFIG } from "./modules/config.js";
-import { ShowToast, Toast } from "./toasts.js";
+import { ShowToast, Toast } from "./modules/toasts.js";
 
 let clientId;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
@@ -35,15 +35,19 @@ function getTokenFromUrl() {
 // Configurar token y mostrar reproductor
 window.onload = async () => {
   document.getElementById("file-input-container").style.display = "none";
+  document.getElementById("buttons").style.display = "none";
+  document.getElementById("toCustom").style.display = "none";
   accessToken = getTokenFromUrl();
   if (accessToken) {
     document.getElementById("login").style.display = "none";
     document.getElementById("textId").style.display = "none";
     document.getElementById("player").style.display = "block";
+    document.getElementById("toCustom").style.display = "block";
+
     ShowToast.fire({
       html: `
       <div>
-        <p>¿Deseas personalizar el fondo?</p>
+        <p>¿Deseas personalizar el reproductor?</p>
         <button id="yesButton" style="margin-right: 10px;">Sí</button>
         <button id="noButton">No</button>
       </div>
