@@ -8,7 +8,10 @@ fileInput.addEventListener("change", () => {
   if (file) {
     const reader = new FileReader();
     reader.onload = (e) => {
+      player.style.height = "250px";
+      player.style.width = "250px";
       player.style.backgroundImage = `url(${e.target.result})`;
+      player.style.backgroundRepeat = "no-repeat";
       player.style.backgroundSize = "cover";
       player.style.backgroundPosition = "center";
       player.style.backgroundRepeat = "no-repeat";

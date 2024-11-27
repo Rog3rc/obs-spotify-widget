@@ -1,13 +1,8 @@
-import { CONFIG } from "./config.js";
+import { CONFIG } from "./modules/config.js";
 import { ifToast, Toast } from "./toasts.js";
 
 let clientId;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
-const scopes = [
-  "user-read-playback-state",
-  "user-modify-playback-state",
-  "user-read-currently-playing",
-];
 
 document.getElementById("login").addEventListener("click", () => {
   if (document.getElementById("textId").value) {
@@ -22,7 +17,7 @@ document.getElementById("login").addEventListener("click", () => {
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
     redirectUri
-  )}&scope=${encodeURIComponent(scopes.join(" "))}`;
+  )}&scope=${encodeURIComponent(CONFIG.SCOPES.join(" "))}`;
   document.getElementById("textId").value = "";
   window.location.href = authUrl;
 });
@@ -201,8 +196,28 @@ document
     }
   });
 
+// Prev - Next set
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const prevButton = `\u23EE`;
+const nextButton = `\u23ED`;
+
+prev.innerText = prevButton;
+next.innerText = nextButton;
+
+let change = false;
+const center = document.getElementById("play-pause");
+const playButton = `\u25B6`;
+const pauseButton = `\u23F8`;
+
+center.innerText = playButton;
+
 // Controlar reproducción (Play/Pause)
 document.getElementById("play-pause").addEventListener("click", async () => {
+  change = !change;
+
+  center.innerText = change ? playButton : pauseButton;
+
   // Verificamos el estado actual del reproductor
   const response = await fetch("https://api.spotify.com/v1/me/player", {
     headers: {
