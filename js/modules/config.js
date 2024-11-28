@@ -1,6 +1,6 @@
 export const CONFIG = {
-  URL: "http://localhost:5500",
-  // URL: "https://obs-spotify-widget.vercel.app",
+  // URL: "http://localhost:5500",
+  URL: "https://obs-spotify-widget.vercel.app",
   SCOPES: [
     "user-read-playback-state",
     "user-modify-playback-state",
