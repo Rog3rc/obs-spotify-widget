@@ -1,25 +1,27 @@
-import { FC, useEffect, useState } from "react";
-import CurrentTrack from "../../functions/player/CurrentTrack";
-import startTimer from "../../functions/player/StartTimer";
+import { Dispatch, FC, SetStateAction } from "react";
+import { SliderController } from "../../functions/player/controllers/SliderPosition";
 
 export interface ISlider {
   token: string;
+  range: number;
+  setRange: Dispatch<SetStateAction<number>>;
 }
 
-const Slider: FC<ISlider> = ({ token }) => {
-  const [range, setRange] = useState<number>(0);
-  useEffect(() => {
-    (async () => {
-      await CurrentTrack(token, setRange);
-      startTimer(token, setRange);
-    })();
-  }, []);
+const Slider: FC<ISlider> = ({ token, range, setRange }) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const progress = Number(e.target.value);
+    setRange(progress);
+
+    // Llama a SliderController para actualizar la posición
+    await SliderController(token, progress, setRange);
+  };
+
   return (
     <input
       className="form-range m-2 w-50 border border-3 border-primary"
       type="range"
       value={range}
-      onChange={(e) => setRange(Number(e.target.value))}
+      onChange={handleChange}
       min={0}
       max={100}
       step={0.1}

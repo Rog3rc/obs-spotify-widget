@@ -7,7 +7,7 @@ import Token from "./functions/token";
 import { ShowToast } from "./functions/alerts";
 
 export interface IApp {
-  props: "";
+  props?: "";
 }
 
 const App: FC<IApp> = () => {
@@ -37,10 +37,12 @@ const App: FC<IApp> = () => {
       ShowToast(
         setShowCustom,
         `
-      <div>
+      <div class="container-sm d-flex flex-column">
         <p>¿Deseas personalizar el reproductor?</p>
-        <button id="yesButton" style="margin-right: 10px;">Sí</button>
-        <button id="noButton">No</button>
+        <div class="d-flex flex-row gap-2">
+        <button id="yesButton" class="btn btn-success">Sí</button>
+        <button id="noButton" class="btn btn-success">No</button>
+        </div>
       </div>
     `
       );

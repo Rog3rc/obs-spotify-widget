@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 export interface IInfo {
-  token: string;
+  props?: "";
 }
 
 const Info: FC<IInfo> = () => {

@@ -1,7 +1,10 @@
-import { SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import updateTimers from "./Timers";
 
-const CurrentTrack = async (token: string, setRange?: SetStateAction<any>) => {
+const CurrentTrack = async (
+  token: string,
+  setRange: Dispatch<SetStateAction<number>>
+) => {
   try {
     const response = await fetch("https://api.spotify.com/v1/me/player", {
       headers: {
@@ -12,14 +15,14 @@ const CurrentTrack = async (token: string, setRange?: SetStateAction<any>) => {
     const data = await response.json();
 
     if (data && data.item) {
-      let trackName = document.getElementById("track-name");
-      let trackArtist = document.getElementById("artist-name");
+      const trackName = document.getElementById("track-name");
+      const trackArtist = document.getElementById("artist-name");
       if (trackName) {
         trackName.innerText = data.item.name;
       }
       if (trackArtist) {
         trackArtist.innerText = data.item.artists
-          .map((artist: any) => artist.name)
+          .map((artist: { name: string }) => artist.name)
           .join(", ");
       }
 
