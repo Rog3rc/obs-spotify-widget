@@ -8,7 +8,7 @@ export interface IControllers {
   token: string;
 }
 
-const Controllers: FC<IControllers> = ({ token }) => {
+const Controllers: FC<IControllers> = () => {
   const [playing, setPlaying] = useState<boolean>(false);
   return (
     <div className="m-2 border border-primary border-3">

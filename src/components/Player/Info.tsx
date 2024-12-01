@@ -1,6 +1,8 @@
 import { FC } from "react";
 
-export interface IInfo {}
+export interface IInfo {
+  token: string;
+}
 
 const Info: FC<IInfo> = () => {
   return (

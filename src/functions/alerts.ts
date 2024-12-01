@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import Swal from "sweetalert2";
 
 export const Toast = Swal.mixin({
@@ -12,24 +13,34 @@ export const Toast = Swal.mixin({
   },
 });
 
-export const ShowToast = Swal.mixin({
-  toast: true,
-  position: "center",
-  showConfirmButton: false,
-  showCancelButton: false,
-  timerProgressBar: false,
-  didOpen: (toast) => {
-    // Evento de apertura del Toast
-    toast!.querySelector("#yesButton")!.addEventListener("click", () => {
-      document!.getElementById("file-input-container")!.style.display = "block";
-      document!.getElementById("buttons")!.style.display = "block";
-      Swal.close(); // Cierra el Toast
-    });
-
-    toast!.querySelector("#noButton")!.addEventListener("click", () => {
-      document!.getElementById("file-input-container")!.style.display = "none";
-      document!.getElementById("buttons")!.style.display = "none";
-      Swal.close(); // Cierra el Toast
-    });
-  },
-});
+export const ShowToast = (
+  setShow: Dispatch<SetStateAction<boolean>>,
+  html: string
+) => {
+  return Swal.fire({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    showCancelButton: false,
+    timerProgressBar: false,
+    html: html,
+    didOpen: (toast) => {
+      if (toast) {
+        const yes = toast.querySelector("#yesButton") as HTMLButtonElement;
+        const no = toast.querySelector("#noButton") as HTMLButtonElement;
+        if (yes) {
+          yes.addEventListener("click", () => {
+            setShow(true);
+            Swal.close();
+          });
+        }
+        if (no) {
+          no.addEventListener("click", () => {
+            setShow(false);
+            Swal.close();
+          });
+        }
+      }
+    },
+  });
+};

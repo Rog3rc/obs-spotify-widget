@@ -3,6 +3,7 @@ import Controllers from "./Player/Controllers";
 import Info from "./Player/Info";
 import Slider from "./Player/Slider";
 
+
 export interface IPlayer {
   token: string;
 }
@@ -10,7 +11,7 @@ export interface IPlayer {
 const Player: FC<IPlayer> = ({ token }) => {
   return (
     <div className="d-flex flex-column align-items-center w-50 border border-primary">
-      <Info />
+      <Info token={token} />
       <Slider token={token} />
       <Controllers token={token} />
     </div>

@@ -2,15 +2,20 @@ import { FC, useEffect, useState } from "react";
 import Colors from "./components/Customize/Colors";
 import Image from "./components/Customize/Image";
 import Player from "./components/Player";
-import { ShowToast } from "./functions/alerts";
 import Login from "./functions/login";
 import Token from "./functions/token";
+import { ShowToast } from "./functions/alerts";
 
-export interface IApp {}
+export interface IApp {
+  props: "";
+}
 
 const App: FC<IApp> = () => {
   // Show or Hide Player-Form
   const [show, setShow] = useState<boolean>(false);
+
+  // Show customizations
+  const [showCustom, setShowCustom] = useState<boolean>(true);
 
   // Set Spotify Dev's Id
   const [id, setId] = useState<string>("");
@@ -23,25 +28,32 @@ const App: FC<IApp> = () => {
     if (checkToken) {
       setToken(checkToken);
       setShow(true);
-      ShowToast.fire({
-        html: `
-        <div>
-          <p>¿Deseas personalizar el reproductor?</p>
-          <button id="yesButton" style="margin-right: 10px;">Sí</button>
-          <button id="noButton">No</button>
-        </div>
-      `,
-      });
+      setShowCustom(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      ShowToast(
+        setShowCustom,
+        `
+      <div>
+        <p>¿Deseas personalizar el reproductor?</p>
+        <button id="yesButton" style="margin-right: 10px;">Sí</button>
+        <button id="noButton">No</button>
+      </div>
+    `
+      );
+    }
+  }, [token]);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100 border border-danger">
       {show ? (
         <>
-          <Image />
+          <Image show={showCustom} />
           <Player token={token} />
-          <Colors />
+          <Colors show={showCustom} />
         </>
       ) : (
         <div className="d-flex flex-column align-items-center w-50 border border-primary">
