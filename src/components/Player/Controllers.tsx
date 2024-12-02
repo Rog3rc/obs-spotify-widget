@@ -22,7 +22,7 @@ const Controllers: FC<IControllers> = ({ token, range }) => {
     }
   }, []);
   return (
-    <div className="m-2 border border-primary border-3">
+    <div className="m-2">
       <button className="btn" onClick={() => PreviousTrack(token)}>
         <IconBack />
       </button>

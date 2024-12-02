@@ -6,7 +6,7 @@ export interface IInfo {
 
 const Info: FC<IInfo> = () => {
   return (
-    <div className="m-2 text-center w-50 border border-primary">
+    <div className="m-2 text-center w-50">
       <h4 id="track-name">Song</h4>
       <h5 id="artist-name">Artist</h5>
       <div className="d-inline-flex flex-row align-items-center">

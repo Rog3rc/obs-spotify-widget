@@ -18,7 +18,7 @@ const Slider: FC<ISlider> = ({ token, range, setRange }) => {
 
   return (
     <input
-      className="form-range m-2 w-50 border border-3 border-primary"
+      className="form-range m-2 w-50"
       type="range"
       value={range}
       onChange={handleChange}

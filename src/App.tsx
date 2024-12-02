@@ -50,7 +50,7 @@ const App: FC<IApp> = () => {
   }, [token]);
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100 border border-danger">
+    <div className="d-flex flex-column justify-content-center align-items-center vh-100">
       <Image />
       {show ? (
         <>
@@ -65,7 +65,7 @@ const App: FC<IApp> = () => {
           </button>
         </>
       ) : (
-        <div className="d-flex flex-column align-items-center w-50 border border-primary">
+        <div className="d-flex flex-column align-items-center w-50">
           <div className="w-25 m-2">
             <input
               type="text"

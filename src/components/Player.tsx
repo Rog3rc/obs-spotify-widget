@@ -19,7 +19,7 @@ const Player: FC<IPlayer> = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="border border-primary w-50" id="player">
+    <div className="w-50" id="player">
       <video id="video" muted loop>
         <source src="" type="video/mp4" />
       </video>

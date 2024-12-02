@@ -6,6 +6,7 @@ const IconBack = () => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="icons"
     >
       <path
         d="M21 17.1962L21 6.80387C21 5.26427 19.3333 4.30202 18 5.07182L15 6.80387L15 17.1962L18 18.9282C19.3333 19.698 21 18.7358 21 17.1962Z"

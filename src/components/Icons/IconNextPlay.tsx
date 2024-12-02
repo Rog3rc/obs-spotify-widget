@@ -6,6 +6,7 @@ const IconNext = () => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="icons"
     >
       <path
         d="M3 6.80383V17.1961C3 18.7357 4.66667 19.698 6 18.9282L9 17.1961L9 6.80383L6 5.07177C4.66667 4.30197 3 5.26423 3 6.80383Z"
