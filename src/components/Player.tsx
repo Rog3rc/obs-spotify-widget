@@ -19,10 +19,15 @@ const Player: FC<IPlayer> = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="d-flex flex-column align-items-center w-50 border border-primary">
-      <Info />
-      <Controllers token={token} range={range} />
-      <Slider token={token} range={range} setRange={setRange} />
+    <div className="border border-primary w-50" id="player">
+      <video id="video" muted loop>
+        <source src="" type="video/mp4" />
+      </video>
+      <div className="d-flex flex-column align-items-center">
+        <Info />
+        <Controllers token={token} range={range} />
+        <Slider token={token} range={range} setRange={setRange} />
+      </div>
     </div>
   );
 };

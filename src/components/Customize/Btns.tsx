@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { showHide } from "../../functions/customize/image";
+import { FC, MouseEventHandler, useState } from "react";
+import { showHide } from "../../functions/customize/background";
 
 export interface IColors {
   show: boolean;
@@ -7,7 +7,7 @@ export interface IColors {
 
 const Btns: FC<IColors> = ({ show }) => {
   const [hide, setHide] = useState<boolean>(false);
-  const handelChange = () => {
+  const handelChange: MouseEventHandler<HTMLButtonElement> = () => {
     setHide(!hide);
     showHide(hide);
   };
@@ -18,7 +18,7 @@ const Btns: FC<IColors> = ({ show }) => {
           <h4>Customize</h4>
           <div className="d-flex flex-row align-items-center gap-2">
             <button className="btn btn-success" onClick={handelChange}>
-              Image
+              Background
             </button>
             <button className="btn btn-success">Font Color</button>
             <button className="btn btn-success">Controls Background</button>
