@@ -15,7 +15,7 @@ const ActiveDevice = async (token: string) => {
 
     if (devices.devices && devices.devices.length > 0) {
       const activeDevice = devices.devices.find(
-        (device: any) => device.is_active
+        (device: { is_active: boolean }) => device.is_active
       );
       if (activeDevice) {
         return activeDevice.id;

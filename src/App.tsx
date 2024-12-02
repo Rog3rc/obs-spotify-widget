@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import Colors from "./components/Customize/Colors";
 import Image from "./components/Customize/Image";
 import Player from "./components/Player";
 import Login from "./functions/login";
 import Token from "./functions/token";
 import { ShowToast } from "./functions/alerts";
+import Btns from "./components/Customize/Btns";
 
 export interface IApp {
   props?: "";
@@ -51,11 +51,18 @@ const App: FC<IApp> = () => {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vh-100 border border-danger">
+      <Image />
       {show ? (
         <>
-          <Image show={showCustom} />
           <Player token={token} />
-          <Colors show={showCustom} />
+          <Btns show={showCustom} />
+          <button
+            className="btn btn-success m-2"
+            type="button"
+            onClick={() => setShowCustom(!showCustom)}
+          >
+            Customize
+          </button>
         </>
       ) : (
         <div className="d-flex flex-column align-items-center w-50 border border-primary">
