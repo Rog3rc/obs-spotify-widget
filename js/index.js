@@ -1,13 +1,12 @@
 import { CONFIG } from "./modules/config.js";
 import { ShowToast, Toast } from "./modules/toasts.js";
+import { redirectToAuth, getTokenFromCallback } from "./modules/auth.js";
 
-let clientId;
 const redirectUri = CONFIG.URL; // Debe coincidir con el URI registrado en Spotify
 
-document.getElementById("login").addEventListener("click", () => {
-  if (document.getElementById("textId").value) {
-    clientId = document.getElementById("textId").value;
-  } else {
+document.getElementById("login").addEventListener("click", async () => {
+  const clientId = document.getElementById("textId").value;
+  if (!clientId) {
     Toast.fire({
       icon: "error",
       title: "Please enter a client ID",
@@ -15,29 +14,22 @@ document.getElementById("login").addEventListener("click", () => {
     return;
   }
 
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
-    redirectUri
-  )}&scope=${encodeURIComponent(CONFIG.SCOPES.join(" "))}`;
   document.getElementById("textId").value = "";
-  window.location.href = authUrl;
+  // Redirige a Spotify con PKCE (Authorization Code Flow)
+  await redirectToAuth(clientId, redirectUri, CONFIG.SCOPES);
 });
 
 let accessToken = "";
-
-// Obtener token de acceso desde la URL
-function getTokenFromUrl() {
-  const hash = window.location.hash.substring(1);
-  const params = new URLSearchParams(hash);
-  const token = params.get("access_token");
-  return token;
-}
 
 // Configurar token y mostrar reproductor
 window.onload = async () => {
   document.getElementById("file-input-container").style.display = "none";
   document.getElementById("buttons").style.display = "none";
   document.getElementById("toCustom").style.display = "none";
-  accessToken = getTokenFromUrl();
+
+  // Intentar obtener token desde el callback de Spotify (PKCE)
+  accessToken = await getTokenFromCallback(redirectUri);
+
   if (accessToken) {
     document.getElementById("login").style.display = "none";
     document.getElementById("textId").style.display = "none";
@@ -118,7 +110,7 @@ async function getActiveDeviceId() {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
 
     const devices = await response.json();
@@ -159,7 +151,7 @@ async function seekToPosition(position) {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -186,7 +178,7 @@ document
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     ).then((res) => res.json());
 
     if (currentTrack && currentTrack.item) {
@@ -280,6 +272,5 @@ function startTimer() {
   }, 1000); // Actualiza cada segundo
 }
 
-document.getElementById(
-  "footer"
-).innerHTML = `Made by Rog3rc &#169; ${new Date().getFullYear()}`;
+document.getElementById("footer").innerHTML =
+  `Made by Rog3rc &#169; ${new Date().getFullYear()}`;
